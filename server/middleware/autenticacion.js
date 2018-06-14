@@ -23,8 +23,6 @@ let verificarToken = (req, res, next) => {
 }
 
 
-
-
 let verificaAdmin_Role = (req, res, next) => {
     let usuario = req.usuario;
     console.log(usuario.role );
