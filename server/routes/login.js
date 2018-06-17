@@ -77,12 +77,6 @@ async function verify(token) {
     //const domain = payload['hd'];
 }
 
-
-
-
-
-
-
 app.post("/google", async (req, res) => {
     let token = req.body.idtoken;
     let googleuser = await verify(token)
