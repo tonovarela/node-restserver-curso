@@ -25,7 +25,7 @@ let verificarToken = (req, res, next) => {
 
 let verificaAdmin_Role = (req, res, next) => {
     let usuario = req.usuario;
-    console.log(usuario.role );
+    console.log(usuario.role);
     if (usuario.role === 'ADMIN_ROLE') {
         next();
     } else {
@@ -37,6 +37,9 @@ let verificaAdmin_Role = (req, res, next) => {
         });
 
     }
+
+
+   
 
     // let token = req.get('token');
     // jwt.verify(token, process.env.SEED, (err, decode) => {
@@ -54,7 +57,24 @@ let verificaAdmin_Role = (req, res, next) => {
 
 }
 
+let verificaTokenImg = (req, res, next) => {
+
+    let token = req.query.token;
+    jwt.verify(token, process.env.SEED, (err, decode) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err
+            });
+        }
+        req.usuario = decode.usuario;
+        next();
+
+    });
+};
+
 module.exports = {
     verificarToken,
-    verificaAdmin_Role
+    verificaAdmin_Role,
+    verificaTokenImg
 }
